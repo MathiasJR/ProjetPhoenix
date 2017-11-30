@@ -156,16 +156,6 @@ Prefab:
       propertyPath: mouseInGameObject
       value: 
       objectReference: {fileID: 892146658}
-    - target: {fileID: 114733708963800334, guid: 6df1782f617152240aaef33f9bd06e46,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114386549952482042, guid: 6df1782f617152240aaef33f9bd06e46,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6df1782f617152240aaef33f9bd06e46, type: 2}
   m_IsPrefabParent: 0

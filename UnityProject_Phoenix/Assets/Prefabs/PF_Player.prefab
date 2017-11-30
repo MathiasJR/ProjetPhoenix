@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 114830994174828916}
   - component: {fileID: 114144166567408156}
   - component: {fileID: 114733708963800334}
+  - component: {fileID: 114754512729046048}
   m_Layer: 2
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -3175,9 +3176,46 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555626259241156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bad9ef3e2537d964a8dc8c93d24c4867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundParticleSystemPrefab: {fileID: 1213359257803168, guid: 28bb2a8ca063b394ba0b7e7c779b3105,
+    type: 2}
+  audioSourceList:
+  - {fileID: 82654759898264872}
+  - {fileID: 82511233688638980}
+  - {fileID: 82785584970090558}
+  - {fileID: 82221739089615634}
+  - {fileID: 82351212386974294}
+  - {fileID: 82841330819540162}
+  - {fileID: 82445425212563726}
+  - {fileID: 82244266008310742}
+  - {fileID: 82794301524050778}
+  - {fileID: 82626861401570690}
+  - {fileID: 82630278405968548}
+  materialList:
+  - {fileID: 2100000, guid: 58e1ab72ab3b08e47a80eebcc1963b92, type: 2}
+  - {fileID: 2100000, guid: 4e3faab92e096114f824e89603e4b004, type: 2}
+  - {fileID: 2100000, guid: c42585fb238e311448a51b877fbc0a8f, type: 2}
+  - {fileID: 2100000, guid: 977f442e599b73c4cb48a35796b3f672, type: 2}
+  - {fileID: 2100000, guid: ec92813cb10685041bce4edb0d9cb6ad, type: 2}
+  - {fileID: 2100000, guid: 145944c1828a62b478d8bc41a5f4535f, type: 2}
+  - {fileID: 2100000, guid: c6adf76800ef7644392bff2b0e4b64c5, type: 2}
+  - {fileID: 2100000, guid: b83e0ce1fd1fe3747bfa0eb579ccac17, type: 2}
+  - {fileID: 2100000, guid: 8fdf0d0f2c193bb43a71341170d43001, type: 2}
+  - {fileID: 2100000, guid: 8b558eb59554856478235d0d3a11d344, type: 2}
+  - {fileID: 2100000, guid: e13ead9d7d27b5b428a9d70c304536e4, type: 2}
+--- !u!114 &114754512729046048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555626259241156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c70747ca72adaf449f56ad441e5355b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   soundParticleSystemPrefab: {fileID: 1213359257803168, guid: 28bb2a8ca063b394ba0b7e7c779b3105,
