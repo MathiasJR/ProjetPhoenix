@@ -5,6 +5,8 @@ using UnityEngine;
 public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 {
 
+    public SCP_Recorder myRecorder;
+
     public GameObject soundParticleSystemPrefab;
 
     public List<AudioSource> audioSourceList = new List<AudioSource>();
@@ -84,8 +86,9 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 
         GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
         particleSystemInstance.transform.position = this.transform.position;
-        soundParticleSystemPrefab.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];
-        //particleSystemInstance.GetComponent<ParticleSystem>().Play();
+        particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];
+
+        myRecorder.RecordInput(soundIndex);
 
     }
 

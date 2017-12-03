@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SCP_FlowerCharge : MonoBehaviour
 {
+    public SCP_UIManager myUIManager;
 
     public GameObject player;
 
@@ -16,6 +17,8 @@ public class SCP_FlowerCharge : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        myUIManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<SCP_UIManager>();
+
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
@@ -33,7 +36,7 @@ public class SCP_FlowerCharge : MonoBehaviour
     private void FixedUpdate()
     {
         this.transform.LookAt(player.transform);
-        Debug.Log("myRigidbody.velocity.magnitude : " + myRigidbody.velocity.magnitude);
+        //Debug.Log("myRigidbody.velocity.magnitude : " + myRigidbody.velocity.magnitude);
         if (myRigidbody.velocity.magnitude < maxVelocity)
         {
             float distance = Vector3.Distance(this.transform.position, player.transform.position);
@@ -62,6 +65,7 @@ public class SCP_FlowerCharge : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            myUIManager.AddCharge();
             Destroy(this.gameObject);
         }
     }

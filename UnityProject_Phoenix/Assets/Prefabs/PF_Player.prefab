@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 195190215031093888}
   - component: {fileID: 114028268981892998}
   - component: {fileID: 54669308483625674}
+  - component: {fileID: 114925839791805802}
   m_Layer: 2
   m_Name: PF_Player
   m_TagString: Player
@@ -3218,6 +3219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70747ca72adaf449f56ad441e5355b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myRecorder: {fileID: 114925839791805802}
   soundParticleSystemPrefab: {fileID: 1213359257803168, guid: 28bb2a8ca063b394ba0b7e7c779b3105,
     type: 2}
   audioSourceList:
@@ -3271,6 +3273,19 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 977f442e599b73c4cb48a35796b3f672, type: 2}
   - {fileID: 2100000, guid: ec92813cb10685041bce4edb0d9cb6ad, type: 2}
   - {fileID: 2100000, guid: 145944c1828a62b478d8bc41a5f4535f, type: 2}
+--- !u!114 &114925839791805802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942100968554080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34240003703352f40808c41784c5f8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myUIManager: {fileID: 0}
+  melodyExemple: 01000000010000000400000007000000060000000400000005000000
 --- !u!136 &136700646163671616
 CapsuleCollider:
   m_ObjectHideFlags: 1

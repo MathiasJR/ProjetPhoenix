@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a896253a79c41b46ab452416b192423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeDestruction: 2
+  timeBeforeDestruction: 1.2
 --- !u!198 &198008416355465280
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3407,7 +3407,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: 58e1ab72ab3b08e47a80eebcc1963b92, type: 2}
+  - {fileID: 2100000, guid: 977f442e599b73c4cb48a35796b3f672, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
