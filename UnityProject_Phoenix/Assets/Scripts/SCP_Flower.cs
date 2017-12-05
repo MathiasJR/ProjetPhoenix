@@ -16,13 +16,11 @@ public class SCP_Flower : MonoBehaviour
     private float cooldownTimer = 0;
     public bool canHarvest = true;
 
-    private float timeBetweenNotes = 0.1f;
-    private int noteIndex = 0;
 
     // Use this for initialization
     void Start ()
     {
-        timeBetweenNotes = harvestCooldown / myMelodyPlayer.melodyExemple.Count;
+        //timeBetweenNotes = harvestCooldown / myMelodyPlayer.melodyExemple.Count;
     }
 	
 	// Update is called once per frame
@@ -32,22 +30,8 @@ public class SCP_Flower : MonoBehaviour
         {
             cooldownTimer += Time.deltaTime;
 
-            // MUSIC
-            for (int i = 0; i < myMelodyPlayer.melodyExemple.Count; i++)
-            {
-                if (cooldownTimer > (timeBetweenNotes * (noteIndex + 1)))
-                {
-                    myMelodyPlayer.PlaySound(myMelodyPlayer.melodyExemple[noteIndex]);
-
-                    noteIndex++;
-                    return;
-                }
-            }
-
-            // RESET
             if (cooldownTimer >= harvestCooldown)
             {
-                noteIndex = 0;
                 canHarvest = true;
                 cooldownTimer = 0;
                 //flowerParticleSystem.Stop();
@@ -61,6 +45,12 @@ public class SCP_Flower : MonoBehaviour
         {
             //flowerParticleSystem.Play();
             canHarvest = false;
+            // Security
+            if (harvestCooldown < myMelodyPlayer.totalTimeOfTheMelody)
+            {
+                Debug.LogError("The cooldown time of the flower is shorter than the melody time, this could cause problems is the player harvest while the melody is still playing.");
+            }
+            myMelodyPlayer.playing = true;
             Instantiate(flowerChargePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
         }
     }

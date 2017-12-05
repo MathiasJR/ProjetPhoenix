@@ -641,7 +641,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1374464074721930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.98, y: -1.46, z: 7.68}
+  m_LocalPosition: {x: 2.98, y: -1.46, z: 12.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4376685769934050}
@@ -3169,7 +3169,17 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8fdf0d0f2c193bb43a71341170d43001, type: 2}
   - {fileID: 2100000, guid: 8b558eb59554856478235d0d3a11d344, type: 2}
   - {fileID: 2100000, guid: e13ead9d7d27b5b428a9d70c304536e4, type: 2}
-  melodyExemple: 01000000010000000400000007000000060000000400000005000000
+  playing: 0
+  bpm: 120
+  totalTimeOfTheMelody: 0
+  melodyTest:
+  - {x: 0, y: 1}
+  - {x: 1, y: 0.5}
+  - {x: 2, y: 1}
+  - {x: 3, y: 0.5}
+  - {x: 4, y: 1}
+  - {x: 5, y: 0.5}
+  - {x: 6, y: 1}
 --- !u!135 &135294861365053970
 SphereCollider:
   m_ObjectHideFlags: 1
