@@ -20,7 +20,7 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
 
     private float melodyTimer = 0;
     private int noteIndex = 0;
-    private List<float> incrementedMelodyTimeList = new List<float>();
+    public List<float> incrementedMelodyTimeList = new List<float>();
     private float incrementedTimeValue = 0;
 
     // Use this for initialization
@@ -55,7 +55,7 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
                 if (melodyTimer > incrementedMelodyTimeList[noteIndex])
                 {
                     int note = Mathf.CeilToInt(melodyTest[noteIndex].x);
-                    Debug.Log("melodyTimer : " + melodyTimer);
+                    //Debug.Log("melodyTimer : " + melodyTimer);
                     PlaySound(note);
 
                     noteIndex++;
@@ -77,7 +77,7 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
 
     public void PlaySound(int soundIndex)
     {
-        Debug.Log("PlaySound with soundIndex : " + soundIndex);
+        //Debug.Log("PlaySound with soundIndex : " + soundIndex);
         audioSourceList[soundIndex].Play();
 
         GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);

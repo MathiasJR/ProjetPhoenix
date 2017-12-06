@@ -223,6 +223,11 @@ Prefab:
       propertyPath: mouseInGameObject
       value: 
       objectReference: {fileID: 892146658}
+    - target: {fileID: 114925839791805802, guid: 6df1782f617152240aaef33f9bd06e46,
+        type: 2}
+      propertyPath: myFlowerMelodyPlayer
+      value: 
+      objectReference: {fileID: 668074927}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6df1782f617152240aaef33f9bd06e46, type: 2}
   m_IsPrefabParent: 0
@@ -376,6 +381,12 @@ Terrain:
   m_BakeLightProbesForTrees: 1
   m_ScaleInLightmap: 0.0512
   m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &668074927 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114318779012863650, guid: 13ec63309eab8d246abba27393773af0,
+    type: 2}
+  m_PrefabInternal: {fileID: 754660158}
+  m_Script: {fileID: 11500000, guid: 8a1ab63ef1d3a7140b330859cc4c2baa, type: 3}
 --- !u!1001 &754660158
 Prefab:
   m_ObjectHideFlags: 0
