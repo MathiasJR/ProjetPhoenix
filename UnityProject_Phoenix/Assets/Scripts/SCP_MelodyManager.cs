@@ -20,6 +20,7 @@ public class SCP_MelodyManager : MonoBehaviour
         melodyList.Add(melodyStorage.Melody2);
         melodyList.Add(melodyStorage.Melody3);
         melodyList.Add(melodyStorage.Melody4);
+        melodyList.Add(melodyStorage.Melody5);
 
         bpmList = new List<float>();
         bpmList.Add(melodyStorage.Bpm0);
@@ -27,6 +28,7 @@ public class SCP_MelodyManager : MonoBehaviour
         bpmList.Add(melodyStorage.Bpm2);
         bpmList.Add(melodyStorage.Bpm3);
         bpmList.Add(melodyStorage.Bpm4);
+        bpmList.Add(melodyStorage.Bpm5);
 
         melodyTimingList = new List<List<float>>();
         float incrementedTimeValue;

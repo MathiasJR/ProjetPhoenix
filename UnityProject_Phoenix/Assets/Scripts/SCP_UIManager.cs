@@ -16,7 +16,7 @@ public class SCP_UIManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < chargeText.Count; i++)
         {
             chargeValue.Add(0);
             plantValue.Add(0);

@@ -88,5 +88,21 @@ public class SO_MelodyStorage : ScriptableObject
         get { return _melody4; }
     }
 
+    [Space(10)]
+    [SerializeField]
+    [Tooltip("BPM of the melody n°5")]
+    private float _bpm5;
+    public float Bpm5
+    {
+        get { return _bpm5; }
+    }
+    [SerializeField]
+    [Tooltip("Purple flower's melody")]
+    private List<Vector2> _melody5;
+    public List<Vector2> Melody5
+    {
+        get { return _melody5; }
+    }
+
 
 }

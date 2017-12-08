@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12654d697316cd4b9c9547751671046, type: 3}
   m_Name: STR_MelodyList
   m_EditorClassIdentifier: 
-  _bpm0: 120
+  _bpm0: 100
   _melody0:
   - {x: 0, y: 1}
   - {x: 1, y: 1}
   - {x: 2, y: 1}
-  _bpm1: 120
+  _bpm1: 100
   _melody1:
   - {x: 6, y: 1}
   - {x: 5, y: 0.5}
   - {x: 4, y: 1}
   - {x: 3, y: 0.5}
   - {x: 2, y: 1}
-  _bpm2: 100
+  _bpm2: 80
   _melody2:
   - {x: 5, y: 0.5}
   - {x: 5, y: 0.5}
@@ -50,4 +50,9 @@ MonoBehaviour:
   - {x: 8, y: 0.25}
   - {x: 7, y: 0.5}
   - {x: 6, y: 0.5}
+  - {x: 5, y: 1}
+  _bpm5: 120
+  _melody5:
+  - {x: 1, y: 1}
+  - {x: 3, y: 1}
   - {x: 5, y: 1}
