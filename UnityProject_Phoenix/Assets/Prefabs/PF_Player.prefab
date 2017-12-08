@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 114028268981892998}
   - component: {fileID: 54669308483625674}
   - component: {fileID: 114925839791805802}
+  - component: {fileID: 114499015858633256}
   m_Layer: 2
   m_Name: PF_Player
   m_TagString: Player
@@ -3171,6 +3172,20 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ec92813cb10685041bce4edb0d9cb6ad, type: 2}
   - {fileID: 2100000, guid: 5749347819d4d444191a819c25fa7280, type: 2}
   - {fileID: 2100000, guid: 145944c1828a62b478d8bc41a5f4535f, type: 2}
+--- !u!114 &114499015858633256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1942100968554080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36d9e8749ec2974786c5e9a17243027, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myUIManager: {fileID: 0}
+  recording: 0
+  timingToleranceDivisor: 3
 --- !u!114 &114733708963800334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3220,6 +3235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRecorder: {fileID: 114925839791805802}
+  multiRecorder: {fileID: 114499015858633256}
   soundParticleSystemPrefab: {fileID: 1213359257803168, guid: 28bb2a8ca063b394ba0b7e7c779b3105,
     type: 2}
   audioSourceList:
@@ -3246,6 +3262,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8fdf0d0f2c193bb43a71341170d43001, type: 2}
   - {fileID: 2100000, guid: 8b558eb59554856478235d0d3a11d344, type: 2}
   - {fileID: 2100000, guid: e13ead9d7d27b5b428a9d70c304536e4, type: 2}
+  inputPressed: 0
+  timeBeforeInputReset: 2
 --- !u!114 &114830994174828916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3279,13 +3297,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942100968554080}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34240003703352f40808c41784c5f8ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myUIManager: {fileID: 0}
-  melodyExemple: 01000000010000000400000007000000060000000400000005000000
+  inputManager: {fileID: 114754512729046048}
+  myFlowerMelodyPlayer: {fileID: 0}
+  currentMelodyType: 0
 --- !u!136 &136700646163671616
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3380,7 +3400,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1666477388
+  randomSeed: 1471689232
   InitialModule:
     serializedVersion: 3
     enabled: 1

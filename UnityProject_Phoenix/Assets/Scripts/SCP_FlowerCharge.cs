@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SCP_FlowerCharge : MonoBehaviour
 {
+
+    // 0 : Light Blue, 1 : Light Green, 2 : Yellow, 3 : Orange, 4 : Red
+    public int flowerChargeType = 0;
+
     public SCP_UIManager myUIManager;
 
     public GameObject player;
@@ -65,7 +69,7 @@ public class SCP_FlowerCharge : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            myUIManager.AddCharge();
+            myUIManager.AddCharge(flowerChargeType);
             Destroy(this.gameObject);
         }
     }

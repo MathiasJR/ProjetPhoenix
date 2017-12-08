@@ -5,9 +5,11 @@ using UnityEngine;
 public class SCP_Flower : MonoBehaviour
 {
 
+    // 0 : Light Blue, 1 : Light Green, 2 : Yellow, 3 : Orange, 4 : Red
+    public int flowerType = 0;
+
     public GameObject flowerChargePrefab;
 
-    public ParticleSystem flowerParticleSystem;
     public GameObject spawnPoint;
 
     public SCP_FlowerMelodyPlayer myMelodyPlayer;
@@ -18,9 +20,11 @@ public class SCP_Flower : MonoBehaviour
 
 
     // Use this for initialization
-    void Start ()
+    IEnumerator Start ()
     {
-        //timeBetweenNotes = harvestCooldown / myMelodyPlayer.melodyExemple.Count;
+        yield return new WaitForSeconds(0.5f);
+        myMelodyPlayer.melodyPlayed = SCP_MelodyManager.melodyList[flowerType];
+        myMelodyPlayer.incrementedMelodyTimeList = SCP_MelodyManager.melodyTimingList[flowerType];
     }
 	
 	// Update is called once per frame
@@ -51,7 +55,10 @@ public class SCP_Flower : MonoBehaviour
                 Debug.LogError("The cooldown time of the flower is shorter than the melody time, this could cause problems is the player harvest while the melody is still playing.");
             }
             myMelodyPlayer.playing = true;
-            Instantiate(flowerChargePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+
+            //Instantiate(flowerChargePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            GameObject flowerChargeInstance = Instantiate(flowerChargePrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            flowerChargeInstance.GetComponent<SCP_FlowerCharge>().flowerChargeType = flowerType;
         }
     }
 

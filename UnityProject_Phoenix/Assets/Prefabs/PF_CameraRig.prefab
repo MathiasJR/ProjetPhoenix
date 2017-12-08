@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4928846371707924}
   - component: {fileID: 114650351691066044}
+  - component: {fileID: 114204999328345416}
   m_Layer: 0
   m_Name: PF_CameraRig
   m_TagString: Untagged
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1609400419310058}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 14, z: -20}
+  m_LocalPosition: {x: 0, y: 9.8, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4928846371707924}
@@ -128,6 +129,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: e1d21cc28132b5641b713433bf52cab8, type: 2}
+--- !u!114 &114204999328345416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407834584876636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f407e1e537d99a44a864ed7a17663ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  melodyStorage: {fileID: 11400000, guid: 91e0212aee53fce4594d96c02a829ee7, type: 2}
 --- !u!114 &114486696726933276
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,11 +8,11 @@ public class SCP_Recorder : MonoBehaviour
 
     public SCP_UIManager myUIManager;
 
-    //public List<int> melodyExemple = new List<int>();
+    public SCP_PentatonicExtendedSqueezed inputManager;
 
     public SCP_FlowerMelodyPlayer myFlowerMelodyPlayer;
 
-    //public float timeBeforeReset = 2f;
+    public int currentMelodyType = 0;
 
     private int melodyCurrentIndex = 0;
     private bool recordingMelody = false;
@@ -31,12 +31,17 @@ public class SCP_Recorder : MonoBehaviour
         {
             melodyTimer += Time.deltaTime;
         }
+
+        if (inputManager.inputPressed == false && recordingMelody == true)
+        {
+            FailMelody();
+        }
     }
 
     public void RecordInput(int soundInputIndex)
     {
         //Debug.Log("RecordInput : " + soundInputIndex + " with melodyCurrentIndex : " + melodyCurrentIndex);
-        if (myFlowerMelodyPlayer.melodyTest[melodyCurrentIndex].x == soundInputIndex)
+        if (myFlowerMelodyPlayer.melodyPlayed[melodyCurrentIndex].x == soundInputIndex)
         {
             if (melodyCurrentIndex == 0 && melodyTimer == 0)
             {
@@ -44,13 +49,13 @@ public class SCP_Recorder : MonoBehaviour
                 return;
             }
 
-            float minTime = myFlowerMelodyPlayer.incrementedMelodyTimeList[melodyCurrentIndex] - (myFlowerMelodyPlayer.melodyTest[melodyCurrentIndex].y / 2);
-            float maxTime = myFlowerMelodyPlayer.incrementedMelodyTimeList[melodyCurrentIndex] + (myFlowerMelodyPlayer.melodyTest[melodyCurrentIndex].y / 2);
+            float minTime = myFlowerMelodyPlayer.incrementedMelodyTimeList[melodyCurrentIndex] - (myFlowerMelodyPlayer.melodyPlayed[melodyCurrentIndex].y / 2);
+            float maxTime = myFlowerMelodyPlayer.incrementedMelodyTimeList[melodyCurrentIndex] + (myFlowerMelodyPlayer.melodyPlayed[melodyCurrentIndex].y / 2);
             Debug.Log("melodyTimer : " + melodyTimer + " / minTime : " + minTime + " / maxTime : " + maxTime);
             if (melodyTimer > minTime && melodyTimer < maxTime)
             {
                 melodyCurrentIndex++;
-                if (melodyCurrentIndex >= myFlowerMelodyPlayer.melodyTest.Count)
+                if (melodyCurrentIndex >= myFlowerMelodyPlayer.melodyPlayed.Count)
                 {
                     ValidateMelody();
                 }
@@ -79,7 +84,7 @@ public class SCP_Recorder : MonoBehaviour
         melodyCurrentIndex = 0;
         melodyTimer = 0;
         recordingMelody = false;
-        if (myUIManager.chargeValue > 0)
+        if (myUIManager.chargeValue[0] > 0)
         {
             myUIManager.TransformChargeToPlant();
         }

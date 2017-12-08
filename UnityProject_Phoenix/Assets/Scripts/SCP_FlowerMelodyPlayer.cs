@@ -13,10 +13,10 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
 
     public bool playing = false;
 
-    public float bpm = 120f;
-    private float timeBetweenNotes = 0;
+    //public float bpm = 120f;
+    //private float timeBetweenNotes = 0;
     public float totalTimeOfTheMelody = 0;
-    public List<Vector2> melodyTest = new List<Vector2>();
+    public List<Vector2> melodyPlayed = new List<Vector2>();
 
     private float melodyTimer = 0;
     private int noteIndex = 0;
@@ -28,18 +28,19 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
     {
         // time between notes is in seconds
         // 120 bpm = 0.5s between notes
-        timeBetweenNotes = 60 / bpm;
+        //timeBetweenNotes = 60 / bpm;
 
         incrementedTimeValue = 0;
-        incrementedMelodyTimeList = new List<float>();
+        /*incrementedMelodyTimeList = new List<float>();
         incrementedMelodyTimeList.Add(0);
-        for (int i = 0; i < melodyTest.Count; i++)
+        for (int i = 0; i < melodyPlayed.Count; i++)
         {
-            incrementedTimeValue += melodyTest[i].y * timeBetweenNotes;
+            incrementedTimeValue += melodyPlayed[i].y * timeBetweenNotes;
             incrementedMelodyTimeList.Add(incrementedTimeValue);
-        }
+        }*/
+        //incrementedMelodyTimeList = SCP_MelodyManager.melodyTimingList[]
         totalTimeOfTheMelody = incrementedTimeValue;
-        Debug.Log("totalTimeOfTheMelody : " + totalTimeOfTheMelody);
+        //Debug.Log("totalTimeOfTheMelody : " + totalTimeOfTheMelody);
     }
 
     // Update is called once per frame
@@ -49,19 +50,19 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
         {
             melodyTimer += Time.deltaTime;
 
-            for (int i = 0; i < melodyTest.Count; i++)
+            for (int i = 0; i < melodyPlayed.Count; i++)
             {
                // Debug.Log("noteIndex : " + noteIndex);
                 if (melodyTimer > incrementedMelodyTimeList[noteIndex])
                 {
-                    int note = Mathf.CeilToInt(melodyTest[noteIndex].x);
+                    int note = Mathf.CeilToInt(melodyPlayed[noteIndex].x);
                     //Debug.Log("melodyTimer : " + melodyTimer);
                     PlaySound(note);
 
                     noteIndex++;
 
                     // RESET
-                    if( noteIndex == melodyTest.Count)
+                    if( noteIndex == melodyPlayed.Count)
                     {
                         noteIndex = 0;
                         playing = false;
@@ -82,6 +83,7 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
 
         GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
         particleSystemInstance.transform.position = this.transform.position;
+        particleSystemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];
 
     }

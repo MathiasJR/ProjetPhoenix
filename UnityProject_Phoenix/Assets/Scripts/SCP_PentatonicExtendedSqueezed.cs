@@ -6,6 +6,7 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 {
 
     public SCP_Recorder myRecorder;
+    public SCP_MultiRecorder multiRecorder;
 
     public GameObject soundParticleSystemPrefab;
 
@@ -13,6 +14,9 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 
     public List<Material> materialList = new List<Material>();
 
+    public bool inputPressed = false;
+    public float timeBeforeInputReset = 2f;
+    private float inputTimer = 0;
 
     // Use this for initialization
     void Start ()
@@ -23,6 +27,8 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        inputTimer += Time.deltaTime;
+
 		if (Input.GetKeyDown(KeyCode.A))
         {
             PlaySound(0);
@@ -69,6 +75,11 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
             PlaySound(10);
         }
 
+        if (inputPressed == true && inputTimer > timeBeforeInputReset)
+        {
+            inputPressed = false;
+            inputTimer = 0;
+        }
 
         // TEST INPUTS FOR DEBUG
         /*foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
@@ -82,15 +93,22 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 
     private void PlaySound(int soundIndex)
     {
+        ResetInputTimer();
+
         audioSourceList[soundIndex].Play();
 
         GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
         particleSystemInstance.transform.position = this.transform.position;
         particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];
 
-        myRecorder.RecordInput(soundIndex);
-
+        //myRecorder.RecordInput(soundIndex);
+        multiRecorder.RecordInput(soundIndex);
     }
 
+    private void ResetInputTimer()
+    {
+        inputPressed = true;
+        inputTimer = 0;
+    }
 
 }
