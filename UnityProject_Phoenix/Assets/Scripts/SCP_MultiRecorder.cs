@@ -6,6 +6,8 @@ public class SCP_MultiRecorder : MonoBehaviour
 {
     public SCP_UIManager myUIManager;
 
+    public Animator validationAnimator;
+
     public bool recording = false;
 
     public float timingToleranceDivisor = 3f; // duration of the note divised by this variable (higher value means more difficult)
@@ -155,6 +157,14 @@ public class SCP_MultiRecorder : MonoBehaviour
         {
             Debug.Log("Can't transform plant due to insuficient charge value.");
         }
+
+        validationAnimator.SetBool("blink", true);
+        Invoke("ResetValidationAnimator", 0.2f);
+    }
+
+    private void ResetValidationAnimator()
+    {
+        validationAnimator.SetBool("blink", false);
     }
 
     private void FailMelody()

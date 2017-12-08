@@ -3184,6 +3184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myUIManager: {fileID: 0}
+  validationAnimator: {fileID: 0}
   recording: 0
   timingToleranceDivisor: 3
 --- !u!114 &114733708963800334
