@@ -3419,7 +3419,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8b558eb59554856478235d0d3a11d344, type: 2}
   - {fileID: 2100000, guid: e13ead9d7d27b5b428a9d70c304536e4, type: 2}
   playing: 0
-  bpm: 120
   totalTimeOfTheMelody: 0
   melodyPlayed: []
   incrementedMelodyTimeList: []
@@ -3433,7 +3432,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
   m_Center: {x: 0.00000005960464, y: 0, z: -0.00000008940696}
 --- !u!135 &135972562882186804
 SphereCollider:
