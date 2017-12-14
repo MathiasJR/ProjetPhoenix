@@ -84,7 +84,7 @@ public class SCP_Recorder : MonoBehaviour
         melodyCurrentIndex = 0;
         melodyTimer = 0;
         recordingMelody = false;
-        if (myUIManager.chargeValue[0] > 0)
+        if (myUIManager.flowerUI[0].chargeValue > 0)
         {
             myUIManager.TransformChargeToPlant();
         }

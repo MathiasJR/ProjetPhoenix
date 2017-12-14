@@ -155,36 +155,56 @@ public class SCP_MultiRecorder : MonoBehaviour
         }
 
         // Determine the quality of the melodie that the player validates
+        float score = 0;
         Debug.Log("Final tempo adaptation : " + tempoAdaptationForMelodiesPossible[0]);
         if (Mathf.Abs(tempoAdaptationForMelodiesPossible[0]) < (60 / bpmForMelodiesPossible[0] / timingTolerance))
         {
             Debug.Log("Perfect Tempo !");
+            score += 3;
         }
         else if (Mathf.Abs(tempoAdaptationForMelodiesPossible[0]) < (60 / bpmForMelodiesPossible[0] / (timingTolerance / 2)))
         {
             Debug.Log("Good Tempo");
+            score += 2;
         }
         else
         {
             Debug.Log("Meh Tempo");
+            score += 1;
         }
         Debug.Log("Final timing score : " + playerTimingForMelodiesPossible[0]);
         if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 3)
         {
             Debug.Log("Perfect Timing !");
+            score += 3;
         }
         else if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 2)
         {
             Debug.Log("Good Timing");
+            score += 2;
         }
         else
         {
             Debug.Log("Meh Timing");
+            score += 1;
+        }
+        int plantQuality = 0;
+        if (score > 5)
+        {
+            plantQuality = 0;
+        }
+        else if (score > 3)
+        {
+            plantQuality = 1;
+        }
+        else
+        {
+            plantQuality = 2;
         }
 
-        if (myUIManager.chargeValue[melodyIndex] > 0)
+        if (myUIManager.flowerUI[melodyIndex].chargeValue > 0)
         {
-            myUIManager.TransformChargeToPlant(melodyIndex);
+            myUIManager.TransformChargeToPlant(melodyIndex, plantQuality);
         }
         else
         {

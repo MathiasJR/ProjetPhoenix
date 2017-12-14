@@ -6,21 +6,13 @@ using UnityEngine.UI;
 public class SCP_UIManager : MonoBehaviour
 {
 
-    public List<Text> chargeText = new List<Text>();
-    public List<Text> plantText = new List<Text>();
-
-    public List<int> chargeValue = new List<int>();
-    public List<int> plantValue = new List<int>();
+    public List<SCP_FlowerUI> flowerUI;
 
 
     // Use this for initialization
     void Start ()
     {
-        for (int i = 0; i < chargeText.Count; i++)
-        {
-            chargeValue.Add(0);
-            plantValue.Add(0);
-        }
+        
 	}
 	
 	// Update is called once per frame
@@ -31,21 +23,12 @@ public class SCP_UIManager : MonoBehaviour
 
     public void AddCharge(int chargeType = 0, int chargeAmount = 1)
     {
-        chargeValue[chargeType] = chargeValue[chargeType] + chargeAmount;
-        RefreshUI(chargeType);
+        flowerUI[chargeType].AddCharge(chargeAmount);
     }
 
-    public void TransformChargeToPlant(int chargeType = 0)
+    public void TransformChargeToPlant(int chargeType = 0, int plantQuality = 0)
     {
-        chargeValue[chargeType]--;
-        plantValue[chargeType]++;
-        RefreshUI(chargeType);
-    }
-
-    public void RefreshUI(int chargeType = 0)
-    {
-        chargeText[chargeType].text = "" + chargeValue[chargeType];
-        plantText[chargeType].text = "" + plantValue[chargeType];
+        flowerUI[chargeType].TransformChargeToPlant(plantQuality);
     }
 
 
