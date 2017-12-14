@@ -7,7 +7,7 @@ public class SCP_MelodyManager : MonoBehaviour
     public SO_MelodyStorage melodyStorage;
 
     public static List<List<Vector2>> melodyList;
-    private List<float> bpmList;
+    public static List<float> bpmList;
     public static List<List<float>> melodyTimingList;
 
 

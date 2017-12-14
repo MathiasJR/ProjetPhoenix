@@ -10,10 +10,13 @@ public class SCP_MultiRecorder : MonoBehaviour
 
     public bool recording = false;
 
-    public float timingToleranceDivisor = 3f; // duration of the note divised by this variable (higher value means more difficult)
+    public float timingTolerance = 2.5f; // With a 120pbm, 60/120bpm = 0.5s then divided by timingTolerance : 0.2s
 
     private List<List<Vector2>> melodiesPossiblyPlaying = new List<List<Vector2>>();
-    private List<List<float>> timingforMelodiesPossible = new List<List<float>>();
+    private List<float> bpmForMelodiesPossible = new List<float>();
+    private List<List<float>> timingForMelodiesPossible = new List<List<float>>();
+    private List<float> tempoAdaptationForMelodiesPossible = new List<float>();
+    private List<float> playerTimingForMelodiesPossible = new List<float>();
 
     private int currentNoteIndex = 0;
     private float melodyTimer = 0;
@@ -54,15 +57,20 @@ public class SCP_MultiRecorder : MonoBehaviour
     private void StartMelodyRecord(int inputIndex = 0)
     {
         melodiesPossiblyPlaying = new List<List<Vector2>>();
-        timingforMelodiesPossible = new List<List<float>>();
+        bpmForMelodiesPossible = new List<float>();
+        timingForMelodiesPossible = new List<List<float>>();
+        tempoAdaptationForMelodiesPossible = new List<float>();
+        playerTimingForMelodiesPossible = new List<float>();
         // Add possible melody lists into the dynamic list of possible melodies that the player could be trying to play
         for (int i = 0; i < SCP_MelodyManager.melodyList.Count; i++)
         {
-            //Debug.Log("i : " + i + " / inputIndex : " + inputIndex + " / SCP_MelodyManager.melodyList[i][0].x : " + SCP_MelodyManager.melodyList[i][0].x);
             if (SCP_MelodyManager.melodyList[i][0].x == inputIndex)
             {
                 melodiesPossiblyPlaying.Add(SCP_MelodyManager.melodyList[i]);
-                timingforMelodiesPossible.Add(SCP_MelodyManager.melodyTimingList[i]);
+                bpmForMelodiesPossible.Add(SCP_MelodyManager.bpmList[i]);
+                timingForMelodiesPossible.Add(SCP_MelodyManager.melodyTimingList[i]);
+                tempoAdaptationForMelodiesPossible.Add(0);
+                playerTimingForMelodiesPossible.Add(0);
                 recording = true;
                 currentNoteIndex = 1;
                 CalculateTimeBeforeReset();
@@ -76,32 +84,29 @@ public class SCP_MultiRecorder : MonoBehaviour
         // Check and remove lists based on the note value from all the possible melodies the player could be trying to play
         for (int i = melodiesPossiblyPlaying.Count - 1; i >= 0; i--)
         {
-            //Debug.Log("i : " + i);
             if (melodiesPossiblyPlaying[i][currentNoteIndex].x != inputIndex)
             {
-                melodiesPossiblyPlaying.RemoveAt(i);
-                timingforMelodiesPossible.RemoveAt(i);
+                RemoveMelodieFromPossibleLists(i);
             }
         }
 
         // Check and remove lists based on the timing of the note played
         for (int i = melodiesPossiblyPlaying.Count - 1; i >= 0; i--)
         {
-            /*Debug.Log("i : " + i);
-            for (int j = 0; j < melodiesPossiblyPlaying[i].Count; j++)
-            {
-                Debug.Log("melodiesPossiblyPlaying[i][j] : " + melodiesPossiblyPlaying[i][j]);
-            }*/
-            //Debug.Log("SCP_MelodyManager.melodyTimingList[i][currentNoteIndex] : " + SCP_MelodyManager.melodyTimingList[i][currentNoteIndex]);
-            //Debug.Log("currentNoteIndex : " + currentNoteIndex);
-            //Debug.Log("SCP_MelodyManager.melodyList[i][currentNoteIndex] : " + SCP_MelodyManager.melodyList[i][currentNoteIndex]);
-            float minTime = timingforMelodiesPossible[i][currentNoteIndex] - (melodiesPossiblyPlaying[i][currentNoteIndex].y / timingToleranceDivisor);
-            float maxTime = timingforMelodiesPossible[i][currentNoteIndex] + (melodiesPossiblyPlaying[i][currentNoteIndex].y / timingToleranceDivisor);
-            //Debug.Log("melodyTimer : " + melodyTimer + " / minTime : " + minTime + " / maxTime : " + maxTime);
+            float minTime = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] - (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            float maxTime = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            Debug.Log("melodyTimer : " + melodyTimer +
+                " / perfect timing : " + timingForMelodiesPossible[i][currentNoteIndex] +
+                " / perfect timing with adaptation : " + (timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i]) + 
+                " / minTime : " + minTime + " / maxTime : " + maxTime);
             if (melodyTimer < minTime || melodyTimer > maxTime)
             {
-                melodiesPossiblyPlaying.RemoveAt(i);
-                timingforMelodiesPossible.RemoveAt(i);
+                RemoveMelodieFromPossibleLists(i);
+            }
+            else // Save the timing of the note played and update the tempo expected of the player
+            {
+                playerTimingForMelodiesPossible[i] += Mathf.Abs(melodyTimer - timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i]);
+                tempoAdaptationForMelodiesPossible[i] += melodyTimer - timingForMelodiesPossible[i][currentNoteIndex];
             }
         }
 
@@ -117,7 +122,6 @@ public class SCP_MultiRecorder : MonoBehaviour
         }
         else
         {
-            //Debug.Log("RHELLO");
             if (currentNoteIndex + 1 >= melodiesPossiblyPlaying[0].Count)
             {
                 ValidateMelody(SCP_MelodyManager.melodyList.IndexOf(melodiesPossiblyPlaying[0]));
@@ -144,11 +148,40 @@ public class SCP_MultiRecorder : MonoBehaviour
         recording = false;
         melodyTimer = 0;
         currentNoteIndex = 0;
-        if( melodyIndex == -1)
+        if (melodyIndex == -1)
         {
             Debug.LogError("Can't find melody in manager");
             return;
         }
+
+        // Determine the quality of the melodie that the player validates
+        Debug.Log("Final tempo adaptation : " + tempoAdaptationForMelodiesPossible[0]);
+        if (Mathf.Abs(tempoAdaptationForMelodiesPossible[0]) < (60 / bpmForMelodiesPossible[0] / timingTolerance))
+        {
+            Debug.Log("Perfect Tempo !");
+        }
+        else if (Mathf.Abs(tempoAdaptationForMelodiesPossible[0]) < (60 / bpmForMelodiesPossible[0] / (timingTolerance / 2)))
+        {
+            Debug.Log("Good Tempo");
+        }
+        else
+        {
+            Debug.Log("Meh Tempo");
+        }
+        Debug.Log("Final timing score : " + playerTimingForMelodiesPossible[0]);
+        if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 3)
+        {
+            Debug.Log("Perfect Timing !");
+        }
+        else if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 2)
+        {
+            Debug.Log("Good Timing");
+        }
+        else
+        {
+            Debug.Log("Meh Timing");
+        }
+
         if (myUIManager.chargeValue[melodyIndex] > 0)
         {
             myUIManager.TransformChargeToPlant(melodyIndex);
@@ -162,11 +195,6 @@ public class SCP_MultiRecorder : MonoBehaviour
         Invoke("ResetValidationAnimator", 0.2f);
     }
 
-    private void ResetValidationAnimator()
-    {
-        validationAnimator.SetBool("blink", false);
-    }
-
     private void FailMelody()
     {
         Debug.Log("FailMelody");
@@ -175,18 +203,40 @@ public class SCP_MultiRecorder : MonoBehaviour
         currentNoteIndex = 0;
     }
 
+    private void RemoveMelodieFromPossibleLists(int index = 0)
+    {
+        melodiesPossiblyPlaying.RemoveAt(index);
+        bpmForMelodiesPossible.RemoveAt(index);
+        timingForMelodiesPossible.RemoveAt(index);
+        tempoAdaptationForMelodiesPossible.RemoveAt(index);
+        playerTimingForMelodiesPossible.RemoveAt(index);
+    }
+
     private void CalculateTimeBeforeReset()
     {
         float maxTiming = 0;
-        for (int i = 0; i < timingforMelodiesPossible.Count; i++)
+        for (int i = 0; i < timingForMelodiesPossible.Count; i++)
         {
-            if (timingforMelodiesPossible[i][currentNoteIndex] + (melodiesPossiblyPlaying[i][currentNoteIndex].y / timingToleranceDivisor) > maxTiming)
+            if (timingForMelodiesPossible[i][currentNoteIndex] + (60 / bpmForMelodiesPossible[i] / timingTolerance) > maxTiming)
             {
-                maxTiming = timingforMelodiesPossible[i][currentNoteIndex] + (melodiesPossiblyPlaying[i][currentNoteIndex].y / timingToleranceDivisor);
+                maxTiming = timingForMelodiesPossible[i][currentNoteIndex] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
             }
         }
-        //Debug.Log("New maxTimeBeforeReset : " + maxTiming);
+        Debug.Log("New maxTimeBeforeReset : " + maxTiming);
         maxTimeBeforeReset = maxTiming;
+    }
+
+    private void ResetValidationAnimator()
+    {
+        validationAnimator.SetBool("blink", false);
+    }
+
+    private void ChangeTempoOfTimingList(int listIndexToChange = 0, float tempoChange = 0)
+    {
+        for (int i = 0; i< timingForMelodiesPossible[listIndexToChange].Count; i++)
+        {
+
+        }
     }
 
 }

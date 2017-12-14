@@ -48,7 +48,7 @@ public class SCP_PlayerMovement : MonoBehaviour
 
             if (Physics.Raycast(myRay, out myRaycastHit, 99f))
             {
-                Debug.DrawRay(myRay.origin, myRaycastHit.point);
+                //Debug.DrawRay(myRay.origin, myRaycastHit.point);
                 //Debug.Log("Hit on position : " + myRaycastHit.point);
                 mousePosition = myRaycastHit.point;
                 mouseInGameObject.transform.position = mousePosition;
