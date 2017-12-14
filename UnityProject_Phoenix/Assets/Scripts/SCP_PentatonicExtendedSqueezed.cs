@@ -8,6 +8,8 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
     public SCP_Recorder myRecorder;
     public SCP_MultiRecorder multiRecorder;
 
+    public SCP_SoundFeedbackManager soundFeedbackManager;
+
     public GameObject soundParticleSystemPrefab;
 
     public List<AudioSource> audioSourceList = new List<AudioSource>();
@@ -97,9 +99,11 @@ public class SCP_PentatonicExtendedSqueezed : MonoBehaviour
 
         audioSourceList[soundIndex].Play();
 
-        GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
+        /*GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
         particleSystemInstance.transform.position = this.transform.position;
-        particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];
+        particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];*/
+
+        soundFeedbackManager.PlayAnimation();
 
         //myRecorder.RecordInput(soundIndex);
         multiRecorder.RecordInput(soundIndex);

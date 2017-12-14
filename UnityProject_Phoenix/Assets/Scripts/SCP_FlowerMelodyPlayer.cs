@@ -5,6 +5,8 @@ using UnityEngine;
 public class SCP_FlowerMelodyPlayer : MonoBehaviour
 {
 
+    public SCP_SoundFeedbackManager soundFeedbackManager;
+
     public GameObject soundParticleSystemPrefab;
 
     public List<AudioSource> audioSourceList = new List<AudioSource>();
@@ -81,11 +83,12 @@ public class SCP_FlowerMelodyPlayer : MonoBehaviour
         //Debug.Log("PlaySound with soundIndex : " + soundIndex);
         audioSourceList[soundIndex].Play();
 
-        GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
+        /*GameObject particleSystemInstance = GameObject.Instantiate(soundParticleSystemPrefab);
         particleSystemInstance.transform.position = this.transform.position;
         particleSystemInstance.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];
+        particleSystemInstance.GetComponent<ParticleSystemRenderer>().material = materialList[soundIndex];*/
 
+        soundFeedbackManager.PlayAnimation();
     }
 
 }

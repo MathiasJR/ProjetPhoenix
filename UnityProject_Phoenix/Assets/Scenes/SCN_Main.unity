@@ -1535,21 +1535,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114925839791805802, guid: 6df1782f617152240aaef33f9bd06e46,
-        type: 2}
-      propertyPath: myUIManager
-      value: 
-      objectReference: {fileID: 1313136852}
-    - target: {fileID: 114925839791805802, guid: 6df1782f617152240aaef33f9bd06e46,
-        type: 2}
-      propertyPath: myFlowerMelodyPlayer
-      value: 
-      objectReference: {fileID: 668074927}
-    - target: {fileID: 114028268981892998, guid: 6df1782f617152240aaef33f9bd06e46,
-        type: 2}
-      propertyPath: mouseInGameObject
-      value: 
-      objectReference: {fileID: 892146658}
     - target: {fileID: 114499015858633256, guid: 6df1782f617152240aaef33f9bd06e46,
         type: 2}
       propertyPath: myUIManager
@@ -1560,6 +1545,21 @@ Prefab:
       propertyPath: validationAnimator
       value: 
       objectReference: {fileID: 258872056}
+    - target: {fileID: 114028268981892998, guid: 6df1782f617152240aaef33f9bd06e46,
+        type: 2}
+      propertyPath: mouseInGameObject
+      value: 
+      objectReference: {fileID: 892146658}
+    - target: {fileID: 114925839791805802, guid: 6df1782f617152240aaef33f9bd06e46,
+        type: 2}
+      propertyPath: myUIManager
+      value: 
+      objectReference: {fileID: 1313136852}
+    - target: {fileID: 114925839791805802, guid: 6df1782f617152240aaef33f9bd06e46,
+        type: 2}
+      propertyPath: myFlowerMelodyPlayer
+      value: 
+      objectReference: {fileID: 668074927}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6df1782f617152240aaef33f9bd06e46, type: 2}
   m_IsPrefabParent: 0
@@ -3760,11 +3760,6 @@ Prefab:
     - target: {fileID: 4156732582829350, guid: 6040f22730e734f48b2e1a53444b2359, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114069046771514040, guid: 6040f22730e734f48b2e1a53444b2359,
-        type: 2}
-      propertyPath: flowerParticleSystem
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6040f22730e734f48b2e1a53444b2359, type: 2}
