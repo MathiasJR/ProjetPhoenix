@@ -93,8 +93,24 @@ public class SCP_MultiRecorder : MonoBehaviour
         // Check and remove lists based on the timing of the note played
         for (int i = melodiesPossiblyPlaying.Count - 1; i >= 0; i--)
         {
-            float minTime = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] - (60 / bpmForMelodiesPossible[i] / timingTolerance);
-            float maxTime = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            //float minTime = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] - (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            //float maxTime = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            float minTime = timingForMelodiesPossible[i][currentNoteIndex];
+            float maxTime = timingForMelodiesPossible[i][currentNoteIndex];
+            if (Mathf.Abs(tempoAdaptationForMelodiesPossible[i]) < (60 / bpmForMelodiesPossible[i] / timingTolerance) / 2)
+            {
+                minTime += tempoAdaptationForMelodiesPossible[i] - (60 / bpmForMelodiesPossible[i] / timingTolerance);
+                maxTime += tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            }
+            else if (tempoAdaptationForMelodiesPossible[i] > 0)
+            {
+                maxTime += tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            }
+            else if (tempoAdaptationForMelodiesPossible[i] < 0)
+            {
+                minTime += tempoAdaptationForMelodiesPossible[i] - (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            }
+
             Debug.Log("melodyTimer : " + melodyTimer +
                 " / perfect timing : " + timingForMelodiesPossible[i][currentNoteIndex] +
                 " / perfect timing with adaptation : " + (timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i]) + 
@@ -237,9 +253,19 @@ public class SCP_MultiRecorder : MonoBehaviour
         float maxTiming = 0;
         for (int i = 0; i < timingForMelodiesPossible.Count; i++)
         {
-            if (timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance) > maxTiming)
+            float maxTime = timingForMelodiesPossible[i][currentNoteIndex];
+            if (Mathf.Abs(tempoAdaptationForMelodiesPossible[i]) < (60 / bpmForMelodiesPossible[i] / timingTolerance) / 2)
             {
-                maxTiming = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+                maxTime += tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            }
+            else if (tempoAdaptationForMelodiesPossible[i] > 0)
+            {
+                maxTime += tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+            }
+
+            if (maxTime > maxTiming)
+            {
+                maxTiming = maxTime;
             }
         }
         Debug.Log("New maxTimeBeforeReset : " + maxTiming);
