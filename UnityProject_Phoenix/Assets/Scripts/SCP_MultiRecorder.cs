@@ -237,9 +237,9 @@ public class SCP_MultiRecorder : MonoBehaviour
         float maxTiming = 0;
         for (int i = 0; i < timingForMelodiesPossible.Count; i++)
         {
-            if (timingForMelodiesPossible[i][currentNoteIndex] + (60 / bpmForMelodiesPossible[i] / timingTolerance) > maxTiming)
+            if (timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance) > maxTiming)
             {
-                maxTiming = timingForMelodiesPossible[i][currentNoteIndex] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
+                maxTiming = timingForMelodiesPossible[i][currentNoteIndex] + tempoAdaptationForMelodiesPossible[i] + (60 / bpmForMelodiesPossible[i] / timingTolerance);
             }
         }
         Debug.Log("New maxTimeBeforeReset : " + maxTiming);
