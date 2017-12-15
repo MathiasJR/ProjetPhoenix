@@ -173,12 +173,12 @@ public class SCP_MultiRecorder : MonoBehaviour
             score += 1;
         }
         Debug.Log("Final timing score : " + playerTimingForMelodiesPossible[0]);
-        if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 3)
+        if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 3f)
         {
             Debug.Log("Perfect Timing !");
             score += 3;
         }
-        else if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 2)
+        else if (playerTimingForMelodiesPossible[0] < ((60 / bpmForMelodiesPossible[0] / timingTolerance) * melodiesPossiblyPlaying[0].Count) / 1.5f)
         {
             Debug.Log("Good Timing");
             score += 2;
